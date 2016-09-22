@@ -1,4 +1,5 @@
 class Frame(object):
+    """The Frame object is a collection of attributes with no methods."""
     def __init__(self, code_obj, global_names, local_names, prev_frame):
         self.code_obj = code_obj
         self.global_names = global_names
