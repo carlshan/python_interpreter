@@ -91,9 +91,9 @@ what_to_execute = {
 
 # The below series of instructions correspond to the following code:
 # def s():
-# a = 1
-# b = 2
-# return a + b
+    # a = 1
+    # b = 2
+    # return a + b
 # This is turned into a series of instructions (or bytecode) by a compiler
 what_to_execute = {
     "instructions": [("LOAD_VALUE", 0),
