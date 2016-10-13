@@ -30,6 +30,7 @@ class Function(object):
             'argdefs': self.func_defaults,
         }
         if closure:
+            # Create a tuple of all the cells in the closure
             kw['closure'] = tuple(make_cell(0) for _ in closure)
         self._func = types.FunctionType(code, globs, **kw)
 
@@ -45,5 +46,23 @@ class Function(object):
 
 
 def make_cell(value):
+    """
+    Functions have a __closure__ attribute which contains information on
+    the values accessed in the enclosing scope.
+
+    This returns an actual python cell object with the enclosed values.
+    """
     fn = (lambda x: lambda: x)(value)
+    """
+    The above is similar to the following code:
+        def func1(x):
+            def func2():
+                return x
+            return func2
+
+        fn = func1(value)
+        Since fn references an enclosed function, it will have a __closure__
+        attribute.
+    """
+    # Returns cell object
     return fn.__closure__[0]
